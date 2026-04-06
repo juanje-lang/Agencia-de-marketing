@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema Integrado de Adquisición de Clientes | Agencia Local</title>
-    <!-- Tailwind CSS (Vía CDN para velocidad en el prototipo) -->
+    <title>Juanje | Neurociencia aplicada al Marketing</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter para legibilidad pura -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0f172a; /* Fondo oscuro, estilo premium y tecnológico */
+            background-color: #0f172a;
             color: #e2e8f0;
         }
         .text-gradient {
@@ -20,30 +20,71 @@
             -webkit-text-fill-color: transparent;
             background-image: linear-gradient(to right, #3b82f6, #8b5cf6);
         }
+        #cookieBanner {
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #cookieBanner.show {
+            transform: translateY(0);
+        }
+        /* Glassmorphism para modales */
+        .glass-modal {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-blue-500 selection:text-white bg-[#0f172a] relative overflow-x-hidden">
 
-    <!-- Modal de Éxito Personalizado (Reemplaza el alert genérico) -->
-    <div id="successModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity">
-        <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 shadow-2xl max-w-sm w-full text-center transform transition-transform">
-            <div class="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4 text-green-500 shadow-[0_0_15px_rgba(34,197,94,0.3)]">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+    <!-- Banner de Cookies -->
+    <div id="cookieBanner" class="fixed bottom-0 left-0 right-0 z-[60] p-4 flex justify-center">
+        <div class="bg-slate-800/95 backdrop-blur-md border border-slate-700 p-4 md:p-6 rounded-2xl shadow-2xl max-w-4xl w-full flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="text-sm text-slate-300 text-center md:text-left">
+                <p>Utilizamos cookies para que tu experiencia sea tan precisa como nuestra ingeniería. Al continuar, aceptas nuestra <button onclick="openLegal('cookies')" class="text-blue-400 underline">política de cookies</button>.</p>
             </div>
-            <h3 class="text-2xl font-bold text-white mb-2">Solicitud Recibida</h3>
-            <p class="text-slate-400 mb-6">Nuestros sistemas están procesando la información. Nos pondremos en contacto en breve.</p>
-            <button onclick="document.getElementById('successModal').classList.add('hidden')" class="w-full px-4 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors font-bold">Entendido</button>
+            <button onclick="acceptCookies()" class="whitespace-nowrap px-6 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg transition-colors text-sm">
+                Aceptar y continuar
+            </button>
         </div>
     </div>
 
-    <!-- Contenedor Principal: Foco Total (Squeeze Page) -->
+    <!-- Modal de Éxito de Captura -->
+    <div id="successModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 shadow-2xl max-w-sm w-full text-center">
+            <div class="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4 text-green-500">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-2">Solicitud Recibida</h3>
+            <p class="text-slate-400 mb-6">Tus datos han sido encriptados. La auditoría de tu negocio está en marcha.</p>
+            <button onclick="closeModal('successModal')" class="w-full px-4 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors font-bold">Entendido</button>
+        </div>
+    </div>
+
+    <!-- Modal Legal Dinámico (Pop-up de Ley) -->
+    <div id="legalModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-black/90 backdrop-blur-md p-4 md:p-10">
+        <div class="glass-modal max-w-4xl w-full max-h-[80vh] overflow-hidden rounded-3xl flex flex-col shadow-2xl">
+            <div class="p-6 border-b border-white/10 flex justify-between items-center bg-white/5">
+                <h3 id="legalTitle" class="text-2xl font-extrabold text-white tracking-tight">Aviso Legal</h3>
+                <button onclick="closeModal('legalModal')" class="text-slate-400 hover:text-white transition-colors">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div id="legalContent" class="p-8 md:p-10 overflow-y-auto text-slate-300 space-y-6 text-sm md:text-base leading-relaxed">
+                <!-- El contenido se inyecta por JS -->
+            </div>
+            <div class="p-6 border-t border-white/10 text-center bg-white/5">
+                <button onclick="closeModal('legalModal')" class="px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl transition-all">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
     <main class="min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8">
         <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-            <!-- COLUMNA IZQUIERDA: Copy persuasivo (Título, Subtítulo, Bullets, Autoridad) -->
+            <!-- COLUMNA IZQUIERDA -->
             <div class="space-y-8 relative z-10">
-                
-                <!-- 1. Título (Gancho) -->
                 <div>
                     <p class="text-blue-400 font-bold tracking-widest uppercase mb-3 text-xs sm:text-sm">
                         Juanje Neurociencia aplicada al Marketing
@@ -54,206 +95,222 @@
                     </h1>
                 </div>
 
-                <!-- 2. Subtítulo Lógico -->
-                <p class="text-lg sm:text-xl text-slate-400 font-medium">
-                    Si tu Instagram no genera dinero, no tienes un negocio. Tienes un álbum de fotos.
+                <p class="text-lg sm:text-xl text-slate-400 font-medium italic border-l-4 border-blue-600 pl-4">
+                    "Si tu Instagram no genera dinero, no tienes un negocio. Tienes un álbum de fotos."
                 </p>
 
-                <!-- 3. Tres Bullets (El mecanismo de valor) -->
                 <ul class="space-y-5 text-slate-300">
                     <li class="flex items-start">
-                        <div class="w-8 h-8 rounded-md bg-blue-900/50 text-blue-400 flex items-center justify-center shrink-0 mr-4 border border-blue-800">
-                            <span class="font-bold text-sm">1</span>
-                        </div>
-                        <span class="mt-1"><strong class="text-white">Contenido orgánico enfocado en ventas:</strong> ¿Para qué hacer contenido si no vas a conseguir más ventas? El tiempo es el activo más valioso de un empresario. Rentabilízalo.</span>
+                        <div class="w-8 h-8 rounded-md bg-blue-900/50 text-blue-400 flex items-center justify-center shrink-0 mr-4 border border-blue-800 text-sm font-bold">1</div>
+                        <span class="mt-1"><strong class="text-white">Contenido orgánico enfocado en ventas:</strong> ¿Para qué hacer contenido si no vas a conseguir más ventas? El tiempo es el activo más valioso. Rentabilízalo.</span>
                     </li>
                     <li class="flex items-start">
-                        <div class="w-8 h-8 rounded-md bg-purple-900/50 text-purple-400 flex items-center justify-center shrink-0 mr-4 border border-purple-800">
-                            <span class="font-bold text-sm">2</span>
-                        </div>
+                        <div class="w-8 h-8 rounded-md bg-purple-900/50 text-purple-400 flex items-center justify-center shrink-0 mr-4 border border-purple-800 text-sm font-bold">2</div>
                         <span class="mt-1"><strong class="text-white">Generamos negocio:</strong> Si alguna decisión no va a mejorar tu negocio, queda automáticamente destruida.</span>
                     </li>
                     <li class="flex items-start">
-                        <div class="w-8 h-8 rounded-md bg-green-900/50 text-green-400 flex items-center justify-center shrink-0 mr-4 border border-green-800">
-                            <span class="font-bold text-sm">3</span>
-                        </div>
+                        <div class="w-8 h-8 rounded-md bg-green-900/50 text-green-400 flex items-center justify-center shrink-0 mr-4 border border-green-800 text-sm font-bold">3</div>
                         <span class="mt-1"><strong class="text-white">Asume el control:</strong> Si puedes mejorar tu negocio y no lo haces, el problema no es tu negocio, eres tú.</span>
                     </li>
                 </ul>
 
-                <!-- 4. Prueba Social / Autoridad -->
                 <div class="pt-6 border-t border-slate-800 flex items-center space-x-4">
                     <div class="flex -space-x-3 shrink-0">
-                        <!-- Avatares simulando clientes usando un color neutro -->
                         <div class="w-12 h-12 rounded-full bg-slate-700 border-2 border-[#0f172a] flex items-center justify-center"><span class="text-xs font-bold">5⭐</span></div>
                         <div class="w-12 h-12 rounded-full bg-slate-600 border-2 border-[#0f172a] flex items-center justify-center"><span class="text-xs font-bold">+</span></div>
                     </div>
                     <div class="text-sm text-slate-400">
                         <p><strong class="text-white text-base">Yo mismo selecciono a mis clientes.</strong></p>
-                        <p>Y solo 3 clientes al mes.</p>
+                        <p>Solo 3 plazas disponibles este mes.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- COLUMNA DERECHA: 5. Formulario y 6. CTA -->
+            <!-- FORMULARIO SUPERIOR -->
             <div class="bg-slate-800/80 backdrop-blur-md p-8 lg:p-10 rounded-2xl border border-slate-700 shadow-2xl relative overflow-hidden">
-                <!-- Brillo de fondo para dar profundidad -->
                 <div class="absolute -top-20 -right-20 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
-                <div class="relative z-10 mb-8">
+                <div class="relative z-10 mb-8 text-center lg:text-left">
                     <h3 class="text-2xl font-extrabold text-white mb-2">Solicita tu Auditoría</h3>
-                    <p class="text-slate-400 text-sm">Estudio de viabilidad estratégico 100% gratuito. Ingresa tus datos para comprobar si tu negocio cualifica.</p>
+                    <p class="text-slate-400 text-sm">Estudio de viabilidad estratégico gratuito. Solo para empresarios decididos.</p>
                 </div>
 
-                <form id="leadForm" class="space-y-5 relative z-10">
-                    <!-- Formulario: Nombre -->
-                    <div>
-                        <label for="name" class="block text-sm font-medium text-slate-300 mb-1">Nombre Completo</label>
-                        <input type="text" id="name" name="nombre" class="w-full bg-slate-900/50 border border-slate-600 rounded-lg px-4 py-3.5 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors placeholder-slate-500" placeholder="Ej. Tony Stark" required>
-                    </div>
+                <form id="leadForm" class="space-y-4 relative z-10">
+                    <input type="text" name="nombre" class="w-full bg-slate-900/50 border border-slate-600 rounded-lg px-4 py-3 text-white focus:border-blue-500 outline-none" placeholder="Nombre Completo" required>
+                    <input type="text" name="empresa" class="w-full bg-slate-900/50 border border-slate-600 rounded-lg px-4 py-3 text-white focus:border-blue-500 outline-none" placeholder="Tu Negocio Local" required>
+                    <input type="email" name="email" class="w-full bg-slate-900/50 border border-slate-600 rounded-lg px-4 py-3 text-white focus:border-blue-500 outline-none" placeholder="Email de contacto" required>
                     
-                    <!-- Formulario: Negocio -->
-                    <div>
-                        <label for="business" class="block text-sm font-medium text-slate-300 mb-1">Nombre del Negocio Local</label>
-                        <input type="text" id="business" name="empresa" class="w-full bg-slate-900/50 border border-slate-600 rounded-lg px-4 py-3.5 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors placeholder-slate-500" placeholder="Ej. Clínicas Stark" required>
-                    </div>
-                    
-                    <!-- Formulario: Correo -->
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-slate-300 mb-1">Correo Electrónico de Contacto</label>
-                        <input type="email" id="email" name="email" class="w-full bg-slate-900/50 border border-slate-600 rounded-lg px-4 py-3.5 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors placeholder-slate-500" placeholder="tony@stark.com" required>
+                    <div class="flex items-start gap-3 py-2 text-left">
+                        <input type="checkbox" id="privacy_top" required class="mt-1 w-4 h-4 rounded border-slate-600 bg-slate-900 text-blue-600 focus:ring-blue-500">
+                        <label for="privacy_top" class="text-xs text-slate-400 leading-tight">
+                            He leído y acepto la <button type="button" onclick="openLegal('privacidad')" class="text-blue-400 underline">política de privacidad</button> y el tratamiento de mis datos.
+                        </label>
                     </div>
 
-                    <!-- 6. CTA (Llamada a la Acción Máxima Claridad) -->
-                    <button type="submit" id="submitBtn" class="w-full mt-6 inline-flex items-center justify-center px-8 py-4 text-lg font-bold rounded-lg text-white bg-blue-600 hover:bg-blue-500 transition-all duration-200 shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.6)] group">
-                        <span id="btnText">Analizar Mi Negocio Ahora</span>
-                        <svg id="btnIcon" class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m-7-7H3"></path></svg>
+                    <button type="submit" id="btnText" class="w-full mt-2 py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg shadow-lg transition-all group">
+                        Analizar Mi Negocio Ahora
                     </button>
-
-                    <p class="text-xs text-center text-slate-500 mt-4 flex items-center justify-center gap-1">
-                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                        Tus datos están cifrados de extremo a extremo.
-                    </p>
                 </form>
             </div>
-
         </div>
     </main>
 
-    <!-- SECCIÓN 2: DESMITIFICACIÓN Y SISTEMA DE PRECISIÓN -->
-    <section class="py-24 relative bg-[#0B1120] border-t border-slate-800/60 overflow-hidden">
-        <!-- Brillo de fondo central -->
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-900/10 blur-[120px] pointer-events-none rounded-full"></div>
-        
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            
-            <!-- Gancho anti-jerga -->
-            <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-10 tracking-tight leading-tight">
-                <span class="text-slate-500 line-through decoration-red-500/70 decoration-4">SEO, SEM, LANDING PAGES, ETC...</span><br>
+    <!-- SECCIÓN 2: DESMITIFICACIÓN -->
+    <section class="py-24 bg-[#0B1120] border-t border-slate-800/60 text-center relative overflow-hidden px-4">
+        <div class="max-w-4xl mx-auto relative z-10">
+            <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-10 tracking-tight">
+                <span class="text-slate-500 line-through decoration-red-500/70 decoration-4 italic">SEO, SEM, LANDING PAGES, ETC...</span><br>
                 <span class="mt-2 block">Chino. Lenguaje inútil.</span>
             </h2>
-            
-            <!-- Promesa de claridad y sistema -->
-            <div class="space-y-8 text-xl md:text-2xl text-slate-300 font-medium max-w-3xl mx-auto">
-                <p>
-                    Te lo explico todo tan claro que no vas a tener dudas de qué es lo que necesitas.
-                </p>
-                <div class="p-8 rounded-2xl bg-slate-800/40 border border-slate-700/50 shadow-inner">
-                    <p class="leading-relaxed">
-                        Creamos un <strong class="text-white">sistema de precisión</strong>, que una vez montado funciona solo.
-                    </p>
+            <div class="space-y-8 text-xl md:text-2xl text-slate-300 font-medium">
+                <p>Te lo explico todo tan claro que no vas a tener dudas de qué es lo que necesitas.</p>
+                <div class="p-8 rounded-2xl bg-slate-800/40 border border-slate-700/50">
+                    <p>Creamos un <strong class="text-white">sistema de precisión</strong> que, una vez montado, funciona solo.</p>
                 </div>
-                <!-- El remate -->
-                <p class="text-4xl md:text-5xl font-extrabold text-white pt-4">
-                    Sí, <span class="text-gradient">solo.</span>
-                </p>
+                <p class="text-4xl md:text-5xl font-extrabold text-white pt-4">Sí, <span class="text-gradient">solo.</span></p>
             </div>
-            
         </div>
     </section>
 
-    <!-- SECCIÓN 3: CIERRE TÁCTICO (Neuromarketing) -->
-    <section class="py-24 relative bg-[#0f172a] border-t border-slate-800 text-center">
-        <!-- Resplandor sutil para atraer la vista al botón -->
-        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-1/2 bg-blue-600/5 blur-[100px] pointer-events-none"></div>
-        
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <!-- SECCIÓN 3: CIERRE TÁCTICO -->
+    <section class="py-24 bg-[#0f172a] border-t border-slate-800 text-center px-4">
+        <div class="max-w-4xl mx-auto relative z-10">
             <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">
-                El poder del <span class="text-blue-500">neuromarketing</span> en tus manos.
+                El poder del <span class="text-blue-500 font-black">neuromarketing</span> en tus manos.
             </h2>
-            <p class="text-xl md:text-3xl text-slate-400 font-medium mb-12">
-                Sin sorpresas. Bueno sí, <span class="text-white font-bold decoration-blue-500 decoration-4 underline-offset-4 underline">que esta vez funciona.</span>
+            <p class="text-xl md:text-3xl text-slate-400 mb-12">
+                Sin sorpresas. Bueno sí, <span class="text-white font-bold border-b-4 border-blue-600">que esta vez funciona.</span>
             </p>
             
-            <!-- NUEVO: Formulario de Captura Inferior (Cierre Directo) -->
-            <div class="max-w-md mx-auto bg-slate-800/80 backdrop-blur-md p-6 lg:p-8 rounded-2xl border border-slate-700 shadow-2xl text-left relative overflow-hidden">
-                <div class="absolute -top-10 -right-10 w-32 h-32 bg-blue-600/20 rounded-full blur-2xl pointer-events-none"></div>
-                
-                <form id="bottomLeadForm" class="space-y-4 relative z-10">
-                    <div>
-                        <input type="text" id="bottom_name" name="nombre" class="w-full bg-slate-900/80 border border-slate-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors placeholder-slate-500" placeholder="Tu Nombre Completo" required>
+            <div class="max-w-md mx-auto bg-slate-800/80 backdrop-blur-md p-8 rounded-2xl border border-slate-700 shadow-2xl text-left">
+                <form id="bottomLeadForm" class="space-y-4">
+                    <input type="text" name="nombre" class="w-full bg-slate-900 border border-slate-600 rounded-lg px-4 py-3 text-white outline-none" placeholder="Nombre Completo" required>
+                    <input type="text" name="empresa" class="w-full bg-slate-900 border border-slate-600 rounded-lg px-4 py-3 text-white outline-none" placeholder="Tu Negocio" required>
+                    <input type="email" name="email" class="w-full bg-slate-900 border border-slate-600 rounded-lg px-4 py-3 text-white outline-none" placeholder="Tu Email" required>
+                    
+                    <div class="flex items-start gap-3 py-2">
+                        <input type="checkbox" id="privacy_bottom" required class="mt-1 w-4 h-4 rounded border-slate-600 bg-slate-900 text-blue-600 focus:ring-blue-500">
+                        <label for="privacy_bottom" class="text-xs text-slate-400">
+                            Acepto el <button type="button" onclick="openLegal('privacidad')" class="text-blue-400 underline">aviso legal y privacidad</button>.
+                        </label>
                     </div>
-                    <div>
-                        <input type="text" id="bottom_business" name="empresa" class="w-full bg-slate-900/80 border border-slate-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors placeholder-slate-500" placeholder="Nombre de tu Negocio" required>
-                    </div>
-                    <div>
-                        <input type="email" id="bottom_email" name="email" class="w-full bg-slate-900/80 border border-slate-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors placeholder-slate-500" placeholder="Tu Correo Electrónico" required>
-                    </div>
-                    <button type="submit" id="bottomSubmitBtn" class="w-full mt-2 inline-flex items-center justify-center px-6 py-4 text-lg font-bold rounded-lg text-white bg-blue-600 hover:bg-blue-500 transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.6)] group">
-                        <span id="bottomBtnText">Reclamar mi Plaza</span>
-                        <svg id="bottomBtnIcon" class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m-7-7H3"></path></svg>
+
+                    <button type="submit" id="bottomBtnText" class="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg transition-all shadow-lg">
+                        Reclamar mi Plaza
                     </button>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- INTERCEPTOR DE FORMULARIO (La Magia Asíncrona) -->
+    <!-- FOOTER LEGAL -->
+    <footer class="py-12 bg-[#0B1120] border-t border-slate-800/60 text-center text-slate-500 text-xs">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="flex flex-wrap justify-center gap-6 mb-6 font-medium uppercase tracking-widest">
+                <button onclick="openLegal('aviso')" class="hover:text-blue-400 transition-colors uppercase">Aviso Legal</button>
+                <button onclick="openLegal('privacidad')" class="hover:text-blue-400 transition-colors uppercase">Privacidad</button>
+                <button onclick="openLegal('cookies')" class="hover:text-blue-400 transition-colors uppercase">Cookies</button>
+            </div>
+            <p>&copy; 2026 Juanje - Ingeniería de Neuro-Conversión. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
     <script>
-        // Endpoint de producción
         const ENDPOINT = "https://formspree.io/f/meepnjgz"; 
 
-        // Función modular para manejar múltiples formularios
-        async function handleFormSubmit(event, btnTextId, btnIconId) {
+        // Diccionario Legal (Textos para los Pop-ups)
+        const LEGAL_TEXTS = {
+            aviso: {
+                title: "Aviso Legal",
+                content: `
+                    <p><strong>Identificación:</strong> Juanje Neurociencia Aplicada al Marketing (en adelante, "la Agencia") es el titular de este sitio web.</p>
+                    <p><strong>Uso del sitio:</strong> El acceso a esta web le atribuye la condición de Usuario, comprometiéndose a un uso lícito y correcto de sus contenidos y servicios.</p>
+                    <p><strong>Propiedad Intelectual:</strong> Todos los contenidos (textos, diseños, logotipos) están protegidos por derechos de propiedad intelectual. Queda prohibida cualquier reproducción total o parcial sin autorización expresa.</p>
+                    <p><strong>Responsabilidad:</strong> La Agencia no se hace responsable de posibles errores técnicos en el sitio o de daños derivados de un uso inapropiado del mismo.</p>
+                `
+            },
+            privacidad: {
+                title: "Política de Privacidad (RGPD)",
+                content: `
+                    <p><strong>Responsable del Tratamiento:</strong> Juanje.</p>
+                    <p><strong>Finalidad:</strong> Los datos que proporcionas a través de los formularios serán utilizados exclusivamente para gestionar tu solicitud de auditoría y, si procede, contactarte para servicios de marketing.</p>
+                    <p><strong>Legitimación:</strong> Consentimiento explícito del interesado al marcar la casilla de aceptación.</p>
+                    <p><strong>Destinatarios:</strong> Los datos se procesan a través de Formspree como encargado del tratamiento. No se cederán datos a terceros salvo obligación legal.</p>
+                    <p><strong>Derechos:</strong> Puedes ejercer tus derechos de acceso, rectificación, supresión y portabilidad de tus datos enviando una solicitud a nuestro contacto.</p>
+                    <p><strong>Plazo de conservación:</strong> Los datos se conservarán mientras se mantenga la relación comercial o durante los años necesarios para cumplir con las obligaciones legales.</p>
+                `
+            },
+            cookies: {
+                title: "Política de Cookies",
+                content: `
+                    <p><strong>¿Qué son las cookies?</strong> Son pequeños archivos que se almacenan en tu dispositivo para optimizar tu navegación.</p>
+                    <p><strong>Cookies Técnicas:</strong> Son esenciales para el funcionamiento de la web (como recordar que ya aceptaste este banner).</p>
+                    <p><strong>Cookies Analíticas:</strong> Nos permiten medir el rendimiento del sistema de adquisición para mejorarlo constantemente.</p>
+                    <p><strong>Gestión:</strong> Puedes configurar o deshabilitar las cookies desde los ajustes de tu navegador, aunque esto puede afectar a la funcionalidad técnica del sitio.</p>
+                `
+            }
+        };
+
+        // Mostrar banner de cookies al cargar
+        window.onload = () => {
+            if (!localStorage.getItem('cookiesAccepted')) {
+                setTimeout(() => document.getElementById('cookieBanner').classList.add('show'), 1000);
+            }
+        };
+
+        function acceptCookies() {
+            localStorage.setItem('cookiesAccepted', 'true');
+            document.getElementById('cookieBanner').classList.remove('show');
+        }
+
+        // Control de Modales
+        function openLegal(type) {
+            const data = LEGAL_TEXTS[type];
+            if (!data) return;
+            
+            document.getElementById('legalTitle').innerText = data.title;
+            document.getElementById('legalContent').innerHTML = data.content;
+            document.getElementById('legalModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Evitar scroll
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+            document.body.style.overflow = ''; // Restaurar scroll
+        }
+
+        // Envío de Formularios
+        async function handleFormSubmit(event, btnId) {
             event.preventDefault(); 
-            
             const form = event.target;
-            const btnText = document.getElementById(btnTextId);
-            const btnIcon = document.getElementById(btnIconId);
-            const data = new FormData(form);
+            const btn = document.getElementById(btnId);
+            const originalText = btn.innerText;
             
-            // ESTADO DE CARGA
-            const originalText = btnText.innerText;
-            btnText.innerText = "Procesando...";
-            btnIcon.classList.add('animate-pulse');
+            btn.innerText = "Procesando...";
+            btn.disabled = true;
 
             try {
-                // Transmisión real de datos
                 const response = await fetch(ENDPOINT, {
                     method: 'POST',
-                    body: data,
+                    body: new FormData(form),
                     headers: { 'Accept': 'application/json' }
                 });
                 
-                if (!response.ok) throw new Error('Error en transmisión de datos');
+                if (!response.ok) throw new Error('Error de transmisión');
 
-                // ÉXITO: Mostramos modal y reseteamos
                 document.getElementById('successModal').classList.remove('hidden');
                 form.reset();
-
             } catch (error) {
-                console.error("Fallo crítico:", error);
-                alert("Hubo un error en los sistemas. Por favor, intente de nuevo.");
+                alert("Error técnico detectado. Inténtalo de nuevo en unos minutos.");
             } finally {
-                // RESTAURAR ESTADO
-                btnText.innerText = originalText;
-                btnIcon.classList.remove('animate-pulse');
+                btn.innerText = originalText;
+                btn.disabled = false;
             }
         }
 
-        // Conectar ambos formularios al sistema de interceptación
-        document.getElementById('leadForm').addEventListener('submit', (e) => handleFormSubmit(e, 'btnText', 'btnIcon'));
-        document.getElementById('bottomLeadForm').addEventListener('submit', (e) => handleFormSubmit(e, 'bottomBtnText', 'bottomBtnIcon'));
+        document.getElementById('leadForm').addEventListener('submit', (e) => handleFormSubmit(e, 'btnText'));
+        document.getElementById('bottomLeadForm').addEventListener('submit', (e) => handleFormSubmit(e, 'bottomBtnText'));
     </script>
 </body>
 </html>
