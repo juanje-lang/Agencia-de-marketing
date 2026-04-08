@@ -1,339 +1,352 @@
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
-<head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZHT3MX3RZ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-4ZHT3MX3RZ');
-</script>
-  <script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '1610609607118730'); 
-  fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=1610609607118730&ev=PageView&noscript=1"
-/></noscript>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juanje | Neurociencia aplicada al Marketing</title>
-    <!-- Tailwind CSS -->
+    <title>JUANJE | Ingeniería de Conversión 360°</title>
+    <meta name="description" content="No vendas Ferraris en un supermercado. Ingeniería de neuro-conversión para transformar tu negocio en una máquina de captación de clientes de alto valor.">
+    <meta property="og:title" content="JUANJE | Ingeniería de Conversión 360°">
+    <meta property="og:description" content="Tu negocio es de élite, deja de vender como si fuera de consumo masivo.">
+    <meta property="og:url" content="https://tuneuromarketing.com/">
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0f172a;
-            color: #e2e8f0;
-        }
-        .text-gradient {
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-image: linear-gradient(to right, #3b82f6, #8b5cf6);
-        }
-        #cookieBanner {
-            transform: translateY(100%);
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        #cookieBanner.show {
-            transform: translateY(0);
-        }
-        /* Glassmorphism para modales */
-        .glass-modal {
-            background: rgba(30, 41, 59, 0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+        .subtle-grid { background-image: radial-gradient(#e2e8f0 1px, transparent 1px); background-size: 32px 32px; }
+        .luxury-shadow { box-shadow: 0 32px 64px -12px rgba(0,0,0,0.08); }
+        .text-balance { text-wrap: balance; }
+        #cookieBanner { transform: translateY(100%); transition: transform 0.5s ease; }
+        #cookieBanner.show { transform: translateY(0); }
+        .glass-modal { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); border: 1px solid rgba(0,0,0,0.05); }
     </style>
 </head>
-<body class="antialiased selection:bg-blue-500 selection:text-white bg-[#0f172a] relative overflow-x-hidden">
 
-    <!-- Banner de Cookies -->
+<body class="bg-white text-[#0f172a] font-sans selection:bg-[#0f172a] selection:text-white overflow-x-hidden">
+
     <div id="cookieBanner" class="fixed bottom-0 left-0 right-0 z-[60] p-4 flex justify-center">
-        <div class="bg-slate-800/95 backdrop-blur-md border border-slate-700 p-4 md:p-6 rounded-2xl shadow-2xl max-w-4xl w-full flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="text-sm text-slate-300 text-center md:text-left">
-                <p>Utilizamos cookies para que tu experiencia sea tan precisa como nuestra ingeniería. Al continuar, aceptas nuestra <button onclick="openLegal('cookies')" class="text-blue-400 underline">política de cookies</button>.</p>
+        <div class="bg-[#0f172a] text-white p-6 rounded-2xl shadow-2xl max-w-4xl w-full flex flex-col md:flex-row items-center justify-between gap-4 border border-slate-700">
+            <p class="text-xs text-slate-300 text-center md:text-left flex-1">
+                Utilizamos cookies técnicas y analíticas para que el sistema funcione con precisión matemática. Al continuar, aceptas nuestra <button onclick="openLegal('cookies')" class="text-blue-400 underline">política de cookies</button>.
+            </p>
+            <div class="flex gap-3 w-full md:w-auto justify-center">
+                <button onclick="rejectCookies()" class="px-6 py-2 bg-transparent border border-slate-500 hover:bg-slate-800 text-slate-300 font-bold rounded-lg transition-all text-xs uppercase tracking-widest w-full md:w-auto">Rechazar</button>
+                <button onclick="acceptCookies()" class="px-6 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg transition-all text-xs uppercase tracking-widest w-full md:w-auto">Aceptar</button>
             </div>
-            <button onclick="acceptCookies()" class="whitespace-nowrap px-6 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg transition-colors text-sm">
-                Aceptar y continuar
-            </button>
         </div>
     </div>
 
-    <!-- Modal de Éxito de Captura -->
-    <div id="successModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-        <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 shadow-2xl max-w-sm w-full text-center">
-            <div class="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4 text-green-500">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-            </div>
-            <h3 class="text-2xl font-bold text-white mb-2">Solicitud Recibida</h3>
-            <p class="text-slate-400 mb-6">Tus datos han sido encriptados. La auditoría de tu negocio está en marcha.</p>
-            <button onclick="closeModal('successModal')" class="w-full px-4 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors font-bold">Entendido</button>
-        </div>
-    </div>
-
-    <!-- Modal Legal Dinámico (Pop-up de Ley) -->
-    <div id="legalModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-black/90 backdrop-blur-md p-4 md:p-10">
-        <div class="glass-modal max-w-4xl w-full max-h-[80vh] overflow-hidden rounded-3xl flex flex-col shadow-2xl">
-            <div class="p-6 border-b border-white/10 flex justify-between items-center bg-white/5">
-                <h3 id="legalTitle" class="text-2xl font-extrabold text-white tracking-tight">Aviso Legal</h3>
-                <button onclick="closeModal('legalModal')" class="text-slate-400 hover:text-white transition-colors">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    <div id="legalModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-black/60 backdrop-blur-md p-4">
+        <div class="glass-modal max-w-3xl w-full max-h-[80vh] overflow-hidden rounded-3xl flex flex-col shadow-2xl">
+            <div class="p-6 border-b flex justify-between items-center bg-slate-50">
+                <h3 id="legalTitle" class="text-xl font-extrabold uppercase tracking-tight">Legal</h3>
+                <button onclick="closeModal('legalModal')" class="text-slate-400 hover:text-black transition-colors">
+                    <i data-lucide="x" class="w-6 h-6"></i>
                 </button>
             </div>
-            <div id="legalContent" class="p-8 md:p-10 overflow-y-auto text-slate-300 space-y-6 text-sm md:text-base leading-relaxed">
-                <!-- El contenido se inyecta por JS -->
-            </div>
-            <div class="p-6 border-t border-white/10 text-center bg-white/5">
-                <button onclick="closeModal('legalModal')" class="px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl transition-all">Cerrar</button>
+            <div id="legalContent" class="p-8 overflow-y-auto text-slate-600 space-y-4 text-sm leading-relaxed"></div>
+            <div class="p-6 border-t text-center bg-slate-50">
+                <button onclick="closeModal('legalModal')" class="px-8 py-3 bg-[#0f172a] text-white font-bold rounded-xl hover:bg-slate-800 transition-colors">Entendido</button>
             </div>
         </div>
     </div>
 
-    <main class="min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8">
-        <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-
-            <!-- COLUMNA IZQUIERDA -->
-            <div class="space-y-8 relative z-10">
-                <div>
-                    <p class="text-blue-400 font-bold tracking-widest uppercase mb-3 text-xs sm:text-sm">
-                        NO VENDAS FERRARIS EN UN SUPERMERCADO
-                    </p>
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
-                        Deja que los clientes <br>
-                        <span class="text-gradient">se acerquen a ti.</span>
-                    </h1>
-                </div>
-
-                <p class="text-lg sm:text-xl text-slate-400 font-medium italic border-l-4 border-blue-600 pl-4">
-                    "Si tu Instagram no genera dinero, no tienes un negocio. Tienes un álbum de fotos."
-                </p>
-
-                <ul class="space-y-5 text-slate-300">
-                    <li class="flex items-start">
-                        <div class="w-8 h-8 rounded-md bg-blue-900/50 text-blue-400 flex items-center justify-center shrink-0 mr-4 border border-blue-800 text-sm font-bold">1</div>
-                        <span class="mt-1"><strong class="text-white">Contenido orgánico enfocado en ventas:</strong> ¿Para qué hacer contenido si no vas a conseguir más ventas? El tiempo es el activo más valioso. Rentabilízalo.</span>
-                    </li>
-                    <li class="flex items-start">
-                        <div class="w-8 h-8 rounded-md bg-purple-900/50 text-purple-400 flex items-center justify-center shrink-0 mr-4 border border-purple-800 text-sm font-bold">2</div>
-                        <span class="mt-1"><strong class="text-white">Generamos negocio:</strong> Si alguna decisión no va a mejorar tu negocio, queda automáticamente destruida.</span>
-                    </li>
-                    <li class="flex items-start">
-                        <div class="w-8 h-8 rounded-md bg-green-900/50 text-green-400 flex items-center justify-center shrink-0 mr-4 border border-green-800 text-sm font-bold">3</div>
-                        <span class="mt-1"><strong class="text-white">Asume el control:</strong> Si puedes mejorar tu negocio y no lo haces, el problema no es tu negocio, eres tú.</span>
-                    </li>
-                </ul>
-
-                <div class="pt-6 border-t border-slate-800 flex items-center space-x-4">
-                    <div class="flex -space-x-3 shrink-0">
-                        <div class="w-12 h-12 rounded-full bg-slate-700 border-2 border-[#0f172a] flex items-center justify-center"><span class="text-xs font-bold">5⭐</span></div>
-                        <div class="w-12 h-12 rounded-full bg-slate-600 border-2 border-[#0f172a] flex items-center justify-center"><span class="text-xs font-bold">+</span></div>
-                    </div>
-                    <div class="text-sm text-slate-400">
-                        <p><strong class="text-white text-base">Yo mismo selecciono a mis clientes.</strong></p>
-                        <p>Solo 3 plazas disponibles este mes.</p>
-                    </div>
-                </div>
+    <nav class="fixed top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-center bg-white/80 backdrop-blur-md border-b border-slate-100">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-[#0f172a] flex items-center justify-center rounded-sm">
+                <i data-lucide="layers" class="w-4 h-4 text-white"></i>
             </div>
-
-            <!-- FORMULARIO SUPERIOR -->
-            <div class="bg-slate-800/80 backdrop-blur-md p-8 lg:p-10 rounded-2xl border border-slate-700 shadow-2xl relative overflow-hidden">
-                <div class="absolute -top-20 -right-20 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
-
-                <div class="relative z-10 mb-8 text-center lg:text-left">
-                    <h3 class="text-2xl font-extrabold text-white mb-2">Disfruta de tu negocio</h3>
-                    <p class="text-slate-400 text-sm">Y del dinero extra</p>
-                </div>
-
-                <form id="leadForm" class="space-y-4 relative z-10">
-                    <input type="text" name="nombre" class="w-full bg-slate-900/50 border border-slate-600 rounded-lg px-4 py-3 text-white focus:border-blue-500 outline-none" placeholder="Nombre Completo" required>
-                    <input type="text" name="empresa" class="w-full bg-slate-900/50 border border-slate-600 rounded-lg px-4 py-3 text-white focus:border-blue-500 outline-none" placeholder="Tu Negocio Local" required>
-                    <input type="email" name="email" class="w-full bg-slate-900/50 border border-slate-600 rounded-lg px-4 py-3 text-white focus:border-blue-500 outline-none" placeholder="Email de contacto" required>
-                    
-                    <div class="flex items-start gap-3 py-2 text-left">
-                        <input type="checkbox" id="privacy_top" required class="mt-1 w-4 h-4 rounded border-slate-600 bg-slate-900 text-blue-600 focus:ring-blue-500">
-                        <label for="privacy_top" class="text-xs text-slate-400 leading-tight">
-                            He leído y acepto la <button type="button" onclick="openLegal('privacidad')" class="text-blue-400 underline">política de privacidad</button> y el tratamiento de mis datos.
-                        </label>
-                    </div>
-
-                    <button type="submit" id="btnText" class="w-full mt-2 py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg shadow-lg transition-all group">
-                        Analizar Mi Negocio Ahora
-                    </button>
-                </form>
-            </div>
+            <span class="font-bold tracking-tighter text-xl uppercase">JUANJE.</span>
         </div>
-    </main>
-
-    <!-- SECCIÓN 2: DESMITIFICACIÓN -->
-    <section class="py-24 bg-[#0B1120] border-t border-slate-800/60 text-center relative overflow-hidden px-4">
-        <div class="max-w-4xl mx-auto relative z-10">
-            <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-10 tracking-tight">
-                <span class="text-slate-500 line-through decoration-red-500/70 decoration-4 italic">SEO, SEM, LANDING PAGES, ETC...</span><br>
-                <span class="mt-2 block">Chino. Lenguaje inútil.</span>
-            </h2>
-            <div class="space-y-8 text-xl md:text-2xl text-slate-300 font-medium">
-                <p>Te lo explico todo tan claro que no vas a tener dudas de qué es lo que necesitas.</p>
-                <div class="p-8 rounded-2xl bg-slate-800/40 border border-slate-700/50">
-                    <p>Creamos un <strong class="text-white">sistema de precisión</strong> que, una vez montado, funciona solo.</p>
-                </div>
-                <p class="text-4xl md:text-5xl font-extrabold text-white pt-4">Sí, <span class="text-gradient">solo.</span></p>
-            </div>
+        <div class="hidden md:flex gap-8 items-center">
+            <a href="#audit-section" class="px-6 py-2 bg-[#0f172a] text-white text-[10px] font-bold uppercase tracking-widest rounded-full hover:bg-slate-800 transition-all">
+                Solicitar Auditoría
+            </a>
         </div>
-    </section>
+    </nav>
 
-    <!-- SECCIÓN 3: CIERRE TÁCTICO -->
-    <section class="py-24 bg-[#0f172a] border-t border-slate-800 text-center px-4">
-        <div class="max-w-4xl mx-auto relative z-10">
-            <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">
-                El poder del <span class="text-blue-500 font-black">neuromarketing</span> en tus manos.
-            </h2>
-            <p class="text-xl md:text-3xl text-slate-400 mb-12">
-                Sin sorpresas. Bueno sí, <span class="text-white font-bold border-b-4 border-blue-600">que esta vez funciona.</span>
+    <section class="relative pt-40 pb-20 px-8 lg:px-20 min-h-screen flex flex-col items-center justify-center text-center subtle-grid">
+        <div class="max-w-5xl space-y-8 relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-slate-100 rounded-full mb-4">
+                <div class="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></div>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-slate-600 italic">No vendas ferraris en un supermercado</span>
+            </div>
+            <h1 class="font-sans text-5xl md:text-8xl font-extrabold leading-[0.95] tracking-tight text-balance uppercase">
+                DEJA QUE LOS CLIENTES <br />
+                <span class="text-blue-600 italic font-serif normal-case">se acerquen a ti.</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed">
+                No es marketing. Es <span class="text-[#0f172a] font-bold underline decoration-blue-500 decoration-4">Ingeniería de Conversión</span>. Integramos SEO, SEM y Redes en un sistema diseñado para capturar el deseo de tu mercado.
             </p>
-            
-            <div class="max-w-md mx-auto bg-slate-800/80 backdrop-blur-md p-8 rounded-2xl border border-slate-700 shadow-2xl text-left">
-                <form id="bottomLeadForm" class="space-y-4">
-                    <input type="text" name="nombre" class="w-full bg-slate-900 border border-slate-600 rounded-lg px-4 py-3 text-white outline-none" placeholder="Nombre Completo" required>
-                    <input type="text" name="empresa" class="w-full bg-slate-900 border border-slate-600 rounded-lg px-4 py-3 text-white outline-none" placeholder="Tu Negocio" required>
-                    <input type="email" name="email" class="w-full bg-slate-900 border border-slate-600 rounded-lg px-4 py-3 text-white outline-none" placeholder="Tu Email" required>
-                    
-                    <div class="flex items-start gap-3 py-2">
-                        <input type="checkbox" id="privacy_bottom" required class="mt-1 w-4 h-4 rounded border-slate-600 bg-slate-900 text-blue-600 focus:ring-blue-500">
-                        <label for="privacy_bottom" class="text-xs text-slate-400">
-                            Acepto el <button type="button" onclick="openLegal('privacidad')" class="text-blue-400 underline">aviso legal y privacidad</button>.
-                        </label>
-                    </div>
+            <div class="pt-10 flex flex-col items-center gap-8">
+                <a href="#audit-section" class="px-12 py-6 bg-[#0f172a] text-white font-bold uppercase tracking-[0.2em] text-sm rounded-full luxury-shadow transition-all hover:-translate-y-1">
+                    Iniciar Auditoría de Negocio
+                </a>
+            </div>
+        </div>
+    </section>
 
-                    <button type="submit" id="bottomBtnText" class="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg transition-all shadow-lg">
-                        Reclamar mi Plaza
-                    </button>
+    <section class="py-32 px-8 lg:px-20 bg-slate-50 border-y border-slate-100">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div class="space-y-8">
+                <h2 class="font-sans text-4xl md:text-6xl font-extrabold tracking-tight">VENDER ES UN <br /><span class="text-blue-600 italic font-serif">PROCESO MENTAL.</span></h2>
+                <div class="space-y-6 text-lg text-slate-600 leading-relaxed font-medium">
+                    <p>Siguiendo los principios de <span class="text-[#0f172a] font-bold">Joseph Sugarman</span>, creamos un "tobogán" de ventas donde el cliente no puede evitar deslizarse hasta la conversión.</p>
+                    <p class="border-l-4 border-blue-600 pl-6 italic text-slate-500">"El deseo no se crea. Se canaliza." — Eugene Schwartz.</p>
+                    <p>Si tu Instagram no genera dinero, no tienes un negocio. Tienes un álbum de fotos.</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 gap-6">
+                <div class="p-8 bg-white border border-slate-100 flex items-start gap-6 hover:shadow-xl transition-all group">
+                    <div class="w-12 h-12 bg-slate-50 flex items-center justify-center rounded-lg group-hover:bg-blue-600 transition-colors">
+                        <i data-lucide="search" class="w-6 h-6 text-[#0f172a] group-hover:text-white"></i>
+                    </div>
+                    <div><h3 class="font-bold text-lg mb-1 uppercase tracking-tighter">SEO de Captura</h3><p class="text-slate-500 text-sm">No buscamos tráfico, buscamos intención de compra.</p></div>
+                </div>
+                <div class="p-8 bg-white border border-slate-100 flex items-start gap-6 hover:shadow-xl transition-all group">
+                    <div class="w-12 h-12 bg-slate-50 flex items-center justify-center rounded-lg group-hover:bg-blue-600 transition-colors">
+                        <i data-lucide="mouse-pointer-2" class="w-6 h-6 text-[#0f172a] group-hover:text-white"></i>
+                    </div>
+                    <div><h3 class="font-bold text-lg mb-1 uppercase tracking-tighter">SEM de Precisión</h3><p class="text-slate-500 text-sm">Anuncios que activan disparadores psicológicos.</p></div>
+                </div>
+                <div class="p-8 bg-white border border-slate-100 flex items-start gap-6 hover:shadow-xl transition-all group">
+                    <div class="w-12 h-12 bg-slate-50 flex items-center justify-center rounded-lg group-hover:bg-blue-600 transition-colors">
+                        <i data-lucide="share-2" class="w-6 h-6 text-[#0f172a] group-hover:text-white"></i>
+                    </div>
+                    <div><h3 class="font-bold text-lg mb-1 uppercase tracking-tighter">Social Neuro</h3><p class="text-slate-500 text-sm">Contenido diseñado para detener el scroll.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-32 bg-white text-center px-8 border-b border-slate-100">
+        <div class="max-w-4xl mx-auto space-y-12">
+            <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight">
+                <span class="text-slate-300 line-through decoration-red-500 decoration-4">SEO, SEM, LANDING PAGES...</span>
+                <span class="mt-4 block uppercase">Chino. Lenguaje inútil.</span>
+            </h2>
+            <p class="text-xl md:text-2xl text-slate-500 font-medium">Te lo explico claro: Creamos un <span class="text-blue-600 font-bold underline">sistema de precisión</span> que, una vez montado, funciona solo.</p>
+        </div>
+    </section>
+
+    <section id="audit-section" class="py-40 px-8 relative">
+        <div class="max-w-4xl mx-auto text-center space-y-12">
+            <div class="space-y-4">
+                <h2 class="text-5xl md:text-7xl font-extrabold tracking-tight">ANÁLISIS <span class="text-blue-600 italic font-serif">360°</span></h2>
+                <p class="text-xl text-slate-500 font-medium italic">"Yo mismo selecciono a mis clientes. Solo 3 plazas disponibles."</p>
+            </div>
+            <div class="bg-white border border-slate-100 p-8 md:p-16 luxury-shadow text-left rounded-3xl">
+                <form action="https://formspree.io/f/mvzvlpjb" method="POST" id="leadForm" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Nombre</label>
+                            <input type="text" name="nombre" required placeholder="Tu nombre" class="w-full bg-slate-50 border border-slate-200 px-4 py-4 rounded-xl outline-none focus:border-blue-500 transition-colors">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Negocio</label>
+                            <input type="text" name="negocio" required placeholder="Nombre del negocio" class="w-full bg-slate-50 border border-slate-200 px-4 py-4 rounded-xl outline-none focus:border-blue-500 transition-colors">
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Email</label>
+                        <input type="email" name="email" required placeholder="tu@email.com" class="w-full bg-slate-50 border border-slate-200 px-4 py-4 rounded-xl outline-none focus:border-blue-500 transition-colors">
+                    </div>
+                    <div class="flex items-start gap-3 py-2 text-[10px] uppercase text-slate-400 tracking-widest">
+                        <input type="checkbox" required class="mt-1 cursor-pointer">
+                        <label>Acepto la <button type="button" onclick="openLegal('privacidad')" class="underline hover:text-[#0f172a] transition-colors">política de privacidad</button>.</label>
+                    </div>
+                    <button type="submit" id="submitBtn" class="w-full py-5 bg-[#0f172a] text-white font-bold uppercase tracking-[0.2em] text-xs rounded-xl hover:bg-blue-600 transition-all shadow-xl">Solicitar Auditoría 360°</button>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER LEGAL -->
-    <footer class="py-12 bg-[#0B1120] border-t border-slate-800/60 text-center text-slate-500 text-xs">
-        <div class="max-w-4xl mx-auto px-4">
-            <div class="flex flex-wrap justify-center gap-6 mb-6 font-medium uppercase tracking-widest">
-                <button onclick="openLegal('aviso')" class="hover:text-blue-400 transition-colors uppercase">Aviso Legal</button>
-                <button onclick="openLegal('privacidad')" class="hover:text-blue-400 transition-colors uppercase">Privacidad</button>
-                <button onclick="openLegal('cookies')" class="hover:text-blue-400 transition-colors uppercase">Cookies</button>
+    <footer class="py-20 px-8 border-t border-slate-100 text-center">
+        <div class="max-w-7xl mx-auto space-y-8">
+            <div class="flex flex-wrap justify-center gap-6 text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                <button onclick="openLegal('aviso')" class="hover:text-blue-600 transition-colors">Aviso Legal</button>
+                <button onclick="openLegal('privacidad')" class="hover:text-blue-600 transition-colors">Privacidad</button>
+                <button onclick="openLegal('cookies')" class="hover:text-blue-600 transition-colors">Cookies</button>
             </div>
-            <p>&copy; 2026 Juanje - Ingeniería de Neuro-Conversión. Todos los derechos reservados.</p>
+            <p class="text-[10px] text-slate-300 uppercase tracking-widest">&copy; 2026 // Juanje // Ingeniería de Conversión 360°</p>
         </div>
     </footer>
 
-    <!-- SCRIPTS -->
     <script>
-        const ENDPOINT = "https://formspree.io/f/mvzvlpjb"; 
+        // Inicializar iconos
+        lucide.createIcons();
 
-        // Diccionario Legal (Textos para los Pop-ups)
+        // ==========================================
+        // 1. LÓGICA LEGAL (RGPD & LSSI-CE PARA AUTÓNOMOS)
+        // ==========================================
         const LEGAL_TEXTS = {
-            aviso: {
-                title: "Aviso Legal",
+            aviso: { 
+                title: "Aviso Legal", 
                 content: `
-                    <p><strong>Identificación:</strong> Juanje Neurociencia Aplicada al Marketing (en adelante, "la Agencia") es el titular de este sitio web.</p>
-                    <p><strong>Uso del sitio:</strong> El acceso a esta web le atribuye la condición de Usuario, comprometiéndose a un uso lícito y correcto de sus contenidos y servicios.</p>
-                    <p><strong>Propiedad Intelectual:</strong> Todos los contenidos (textos, diseños, logotipos) están protegidos por derechos de propiedad intelectual. Queda prohibida cualquier reproducción total o parcial sin autorización expresa.</p>
-                    <p><strong>Responsabilidad:</strong> La Agencia no se hace responsable de posibles errores técnicos en el sitio o de daños derivados de un uso inapropiado del mismo.</p>
-                `
+                    <p><strong>Identidad del Titular:</strong> Juan jesús Albalá Mochón</p>
+                    <p><strong>NIF/NIE:</strong> 74739857-T </p>
+                    <p><strong>Domicilio:</strong> Granada, Almuñécar</p>
+                    <p><strong>Correo electrónico:</strong> info@tuneuromarketing.com</p>
+                    <p><strong>Actividad:</strong> Servicios de Marketing y Consultoría Estratégica.</p>
+                    <br>
+                    <p>El presente Aviso Legal regula el uso de este sitio web. El acceso a la web es gratuito salvo en lo relativo al coste de la conexión a través de la red de telecomunicaciones suministrada por el proveedor de acceso contratado por los usuarios.</p>
+                    <p>El usuario se compromete a hacer un uso adecuado de los contenidos y servicios de este sitio web, absteniéndose de realizar actividades ilícitas o contrarias a la buena fe y al orden público.</p>
+                ` 
             },
-            privacidad: {
-                title: "Política de Privacidad (RGPD)",
+            privacidad: { 
+                title: "Política de Privacidad", 
                 content: `
-                    <p><strong>Responsable del Tratamiento:</strong> Juanje.</p>
-                    <p><strong>Finalidad:</strong> Los datos que proporcionas a través de los formularios serán utilizados exclusivamente para gestionar tu solicitud de auditoría y, si procede, contactarte para servicios de marketing.</p>
-                    <p><strong>Legitimación:</strong> Consentimiento explícito del interesado al marcar la casilla de aceptación.</p>
-                    <p><strong>Destinatarios:</strong> Los datos se procesan a través de Formspree como encargado del tratamiento. No se cederán datos a terceros salvo obligación legal.</p>
-                    <p><strong>Derechos:</strong> Puedes ejercer tus derechos de acceso, rectificación, supresión y portabilidad de tus datos enviando una solicitud a nuestro contacto.</p>
-                    <p><strong>Plazo de conservación:</strong> Los datos se conservarán mientras se mantenga la relación comercial o durante los años necesarios para cumplir con las obligaciones legales.</p>
-                `
+                    <p><strong>Responsable del Tratamiento:</strong> Juan jesús Albalá Mochón (74739857-T).</p>
+                    <br>
+                    <p><strong>Finalidad:</strong> Los datos proporcionados mediante el formulario de contacto se utilizarán exclusivamente para gestionar su solicitud de auditoría, contactarle para ofrecerle los servicios solicitados y, si lo consiente, enviarle comunicaciones comerciales relacionadas con nuestra actividad.</p>
+                    <p><strong>Legitimación:</strong> La base legal para el tratamiento de sus datos es su consentimiento expreso otorgado al marcar la casilla de aceptación.</p>
+                    <p><strong>Destinatarios:</strong> Sus datos no serán cedidos a terceros, salvo obligación legal. Los datos recopilados en el formulario son procesados a través de Formspree, proveedor que cumple con las normativas internacionales de seguridad.</p>
+                    <p><strong>Derechos:</strong> Tiene derecho a acceder, rectificar, limitar y suprimir sus datos, así como el derecho a la portabilidad, dirigiéndose a info@tuneuromarketing.com. Asimismo, tiene derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (AEPD).</p>
+                ` 
             },
-            cookies: {
-                title: "Política de Cookies",
+            cookies: { 
+                title: "Política de Cookies", 
                 content: `
-                    <p><strong>¿Qué son las cookies?</strong> Son pequeños archivos que se almacenan en tu dispositivo para optimizar tu navegación.</p>
-                    <p><strong>Cookies Técnicas:</strong> Son esenciales para el funcionamiento de la web (como recordar que ya aceptaste este banner).</p>
-                    <p><strong>Cookies Analíticas:</strong> Nos permiten medir el rendimiento del sistema de adquisición para mejorarlo constantemente.</p>
-                    <p><strong>Gestión:</strong> Puedes configurar o deshabilitar las cookies desde los ajustes de tu navegador, aunque esto puede afectar a la funcionalidad técnica del sitio.</p>
-                `
+                    <p>Una cookie es un pequeño archivo de texto que se almacena en su navegador cuando visita casi cualquier página web.</p>
+                    <br>
+                    <p><strong>Cookies que utilizamos:</strong></p>
+                    <ul class="list-disc pl-5 mt-2 space-y-2">
+                        <li><strong>Cookies Técnicas (Estrictamente necesarias):</strong> Permiten la navegación a través de la web y la utilización de sus diferentes funciones. No requieren consentimiento.</li>
+                        <li><strong>Cookies Analíticas (Google Analytics):</strong> Nos permiten cuantificar el número de usuarios y realizar la medición y análisis estadístico de la utilización que hacen del servicio ofertado.</li>
+                        <li><strong>Cookies Publicitarias/Comportamentales (Meta Pixel):</strong> Almacenan información del comportamiento de los usuarios obtenida a través de la observación continuada de sus hábitos de navegación, lo que permite desarrollar un perfil específico para mostrar publicidad en función del mismo.</li>
+                    </ul>
+                    <br>
+                    <p><strong>Revocación:</strong> Puede configurar su navegador en cualquier momento para aceptar o rechazar las cookies que recibe. También puede borrar el almacenamiento local o usar la navegación privada.</p>
+                ` 
             }
         };
 
-        // Mostrar banner de cookies al cargar
-        window.onload = () => {
-            if (!localStorage.getItem('cookiesAccepted')) {
-                setTimeout(() => document.getElementById('cookieBanner').classList.add('show'), 1000);
-            }
-        };
-
-        function acceptCookies() {
-            localStorage.setItem('cookiesAccepted', 'true');
-            document.getElementById('cookieBanner').classList.remove('show');
-        }
-
-        // Control de Modales
         function openLegal(type) {
-            const data = LEGAL_TEXTS[type];
-            if (!data) return;
-            
-            document.getElementById('legalTitle').innerText = data.title;
-            document.getElementById('legalContent').innerHTML = data.content;
+            document.getElementById('legalTitle').innerText = LEGAL_TEXTS[type].title;
+            document.getElementById('legalContent').innerHTML = LEGAL_TEXTS[type].content;
             document.getElementById('legalModal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; // Evitar scroll
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal(id) {
             document.getElementById(id).classList.add('hidden');
-            document.body.style.overflow = ''; // Restaurar scroll
+            document.body.style.overflow = '';
         }
 
-        // Envío de Formularios
-        async function handleFormSubmit(event, btnId) {
-            event.preventDefault(); 
-            const form = event.target;
-            const btn = document.getElementById(btnId);
-            const originalText = btn.innerText;
+        // ==========================================
+        // 2. SISTEMA DE GESTIÓN DE COOKIES E INYECCIÓN
+        // ==========================================
+        window.onload = () => { 
+            const consent = localStorage.getItem('cookiesAccepted');
+            if (!consent) {
+                // Si no hay respuesta, mostrar banner
+                setTimeout(() => document.getElementById('cookieBanner').classList.add('show'), 1000); 
+            } else if (consent === 'true') {
+                // Si ya aceptó antes, inyectar trackers silenciosamente
+                injectTrackers(); 
+            }
+        };
+
+        function acceptCookies() { 
+            localStorage.setItem('cookiesAccepted', 'true'); 
+            document.getElementById('cookieBanner').classList.remove('show');
+            injectTrackers();
+        }
+
+        function rejectCookies() {
+            localStorage.setItem('cookiesAccepted', 'false'); 
+            document.getElementById('cookieBanner').classList.remove('show');
+            // La inyección no se dispara
+        }
+
+        function injectTrackers() {
+            // Protección contra inyección múltiple
+            if(window.trackersLoaded) return;
+            window.trackersLoaded = true;
+
+            // Inyección de Google Tag Manager
+            const gtagScript = document.createElement('script');
+            gtagScript.async = true;
+            gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-4ZHT3MX3RZ";
+            document.head.appendChild(gtagScript);
+
+            const gtagInline = document.createElement('script');
+            gtagInline.innerHTML = `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-4ZHT3MX3RZ');
+            `;
+            document.head.appendChild(gtagInline);
+
+            // Inyección de Meta Pixel
+            const fbScript = document.createElement('script');
+            fbScript.innerHTML = `
+              !function(f,b,e,v,n,t,s)
+              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+              n.queue=[];t=b.createElement(e);t.async=!0;
+              t.src=v;s=b.getElementsByTagName(e)[0];
+              s.parentNode.insertBefore(t,s)}(window, document,'script',
+              'https://connect.facebook.net/en_US/fbevents.js');
+              fbq('init', '1610609607118730'); 
+              fbq('track', 'PageView');
+            `;
+            document.head.appendChild(fbScript);
+        }
+
+        // ==========================================
+        // 3. PROCESAMIENTO DEL FORMULARIO Y EVENTOS
+        // ==========================================
+        const leadForm = document.getElementById('leadForm');
+        const submitBtn = document.getElementById('submitBtn');
+
+        leadForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
             
-            btn.innerText = "Procesando...";
-            btn.disabled = true;
+            const originalText = submitBtn.innerText;
+            submitBtn.innerText = "PROCESANDO SISTEMA...";
+            submitBtn.disabled = true;
 
             try {
-                const response = await fetch(ENDPOINT, {
+                const response = await fetch(leadForm.action, {
                     method: 'POST',
-                    body: new FormData(form),
+                    body: new FormData(leadForm),
                     headers: { 'Accept': 'application/json' }
                 });
-                
-                if (!response.ok) throw new Error('Error de transmisión');
 
-                document.getElementById('successModal').classList.remove('hidden');
-                form.reset();
-            } catch (error) {
-                alert("Error técnico detectado. Inténtalo de nuevo en unos minutos.");
-            } finally {
-                btn.innerText = originalText;
-                btn.disabled = false;
+                if (response.ok) {
+                    // Disparar eventos de conversión solo si los trackers existen (el usuario aceptó cookies)
+                    if (typeof fbq !== 'undefined') fbq('track', 'Lead');
+                    if (typeof gtag !== 'undefined') gtag('event', 'generate_lead');
+                    
+                    alert('Sistemas sincronizados. Auditoría en marcha.');
+                    leadForm.reset();
+                } else { 
+                    alert('Error en el enlace de transmisión. Por favor, inténtelo de nuevo.'); 
+                }
+            } catch (error) { 
+                alert('Fallo de red. Compruebe su conexión.'); 
+            } finally { 
+                submitBtn.innerText = originalText; 
+                submitBtn.disabled = false; 
             }
-        }
-
-        document.getElementById('leadForm').addEventListener('submit', (e) => handleFormSubmit(e, 'btnText'));
-        document.getElementById('bottomLeadForm').addEventListener('submit', (e) => handleFormSubmit(e, 'bottomBtnText'));
+        });
     </script>
 </body>
 </html>
